@@ -39,10 +39,21 @@ int _printf(const char *format, ...)
 				case 's':
 					{
 						const char *str = va_arg(args, const char *);
-						while (*str != '\0')
+						int i, len = 0;
+
+						if (str == NULL)
 						{
-							count += _putchar(*str);
-							str++;
+							return (len);
+						}
+						else
+						{
+							len = strlen(str);
+
+							for (i = 0; i < len; i++)
+							{
+							       	_putchar(str[i]);
+								count++;
+							}
 						}
 						break;
 					}
