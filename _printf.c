@@ -71,6 +71,11 @@ int _printf(const char *format, ...)
                                                 count += printf_rot13(va_arg(args, char *));
                                                 break;
                                         }
+				case 'r':
+                                        {
+                                                count += printf_r(va_arg(args, char *));
+                                                break;
+                                        }
 				case '%':
 					count += _putchar('%');
 					break;
