@@ -1,7 +1,8 @@
-#NAME
-       printf, fprintf, dprintf, sprintf, snprintf, vprintf, vfprintf, vdprintf, vsprintf, vsnprintf - formatted output conversion
+# Printf Project
 
-#SYNOPSIS
+printf, fprintf, dprintf, sprintf, snprintf, vprintf, vfprintf, vdprintf, vsprintf, vsnprintf - formatted output conversion
+
+### SYNOPSIS
        #include <stdio.h>
 
        int printf(const char *format, ...);
@@ -18,7 +19,7 @@
        int vsprintf(char *str, const char *format, va_list ap);
        int vsnprintf(char *str, size_t size, const char *format, va_list
 
-#DESCRIPTION
+### DESCRIPTION
        The  functions  in  the  printf()  family  produce  output  according to a format as described below.  The functions printf() and
        vprintf() write output to stdout, the standard output stream; fprintf() and vfprintf() write output to the given  output  stream;
        sprintf(), snprintf(), vsprintf() and vsnprintf() write to the character string str.
@@ -32,14 +33,14 @@
        ments.   These  functions do not call the va_end macro.  Because they invoke the va_arg macro, the value of ap is undefined after
        the call.  See stdarg(3).
 
-#Format of the format string
+### Format of the format string
        The  format string is a character string, beginning and ending in its initial shift state, if any.  The format string is composed
        of zero or more directives: ordinary characters (not %), which are copied unchanged to the output stream; and conversion specifi‐
        cations, each of which results in fetching zero or more subsequent arguments.  Each conversion specification is introduced by the
        character %, and ends with a conversion specifier.  In between there may be (in this order) zero or more flags, an optional mini‐
        mum field width, an optional precision and an optional length modifier.
 
-#RETURN VALUE
+### RETURN VALUE
        Upon successful return, these functions return the number of characters printed (excluding the null byte used to  end  output  to
        strings).
 
