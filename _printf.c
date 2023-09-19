@@ -1,56 +1,57 @@
 #include "main.h"
 #include <stdarg.h>
 
+/*
+ * _printf - The fuction writes output to stdout,
+ *  and returns the numbers of characters.
+ *
+ *  @format: is a character string composed of zero or more directives.
+ *  @count: holds the number of charaters outputed.
+ *
+ */
+
 int _printf(const char *format, ...)
 {
-	int n = 0;
 	va_list args;
-
+	const char *ptr;
+	int count = 0;
+	
 	va_start(args, format);
-
-	while(*format != '\0')
+	for (ptr = format; *ptr != '\0'; ptr++)
 	{
-		if(*format == '%')
+		if (*ptr == '%')
 		{
-			char val = (char)va_arg(args, int);
-
-			format++;
-
-			if(val == 'c')
+			ptr++;
+			switch (*ptr)
 			{
-				_putchar(val);
-				n++;
-			}
-			else if(val == 's')
-			{
-				const char *str = va_arg(args, const char *);
-
-				while(*str != '\0')
-				{
-					_putchar(*str);
-					n++;
-					str++;
-				}
-			}
-			else if(val == '%')
-			{
-				_putchar('%');
-				n++;
-			}
-			else
-			{
-				return (-1);
+				case 'c':
+					{
+						count += _putchar(va_arg(args, int));
+						break;
+					}
+				case 's':
+					{
+						const char *str = va_arg(args, const char *);
+						while (*str != '\0')
+						{
+							count += _putchar(*str);
+							str++;
+						}
+						break;
+					}
+				case '%':
+					count += _putchar('%');
+					break;
+				default:
+					count += _putchar('%');
+					break;
 			}
 		}
 		else
 		{
-			_putchar(*format);
-			n++;
+			count += _putchar(*ptr);
 		}
-		format++;
 	}
-
 	va_end(args);
-
-	return n;
+	return count;
 }
