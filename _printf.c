@@ -76,7 +76,7 @@ int _printf(const char *format, ...)
                                                 count += printf_r(va_arg(args, char *));
                                                 break;
                                         }
-				case 'u':
+				case 'b':
                                         {
                                                 count += printf_unsigned(va_arg(args, int));
                                                 break;
