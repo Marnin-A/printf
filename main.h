@@ -5,7 +5,7 @@
 
 int _printf(const char *format, ...);
 void int_to_str(int num, char *str, int buffer_size);
-int printf_unsigned(int val);
+int printf_bin(unsigned int val);
 int printf_rot13(char* val);
 int printf_dec(int val);
 int printf_int(int val);

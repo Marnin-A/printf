@@ -78,7 +78,7 @@ int _printf(const char *format, ...)
                                         }
 				case 'b':
                                         {
-                                                count += printf_unsigned(va_arg(args, int));
+                                                count += printf_bin(va_arg(args,unsigned int));
                                                 break;
                                         }
 				case '%':
