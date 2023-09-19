@@ -27,8 +27,6 @@ int _printf(const char *format, ...)
 	{
 		if (*ptr == '%')
 		{
-			char *numStr;
-
 			ptr++;
 			switch (*ptr)
 			{
@@ -59,28 +57,14 @@ int _printf(const char *format, ...)
 						break;
 					}
 				case 'd':
+					{
+						count += printf_dec(va_arg(args, int));
+						break;
+					}
             			case 'i':
-            				{
-                				int num = va_arg(args, int);
-						int digits = num_digits(num);
-                				char *buffer = (char *)malloc((digits + 1) * sizeof(char));
-
-                                                if (buffer == NULL)
-                                                {
-                                                    va_end(args);
-                                                    return (-1);
-						}
-						int_to_str(num, buffer, digits + 1);
-
-                				numStr = buffer;
-                				
-						while (*numStr != '\0')
-                				{
-                    					count += _putchar(*numStr);
-                    					numStr++;
-                				}
-                                                free(buffer);
-                				break;
+            				{	
+						count += printf_int(va_arg(args, int));
+						break;
             				}
 				case '%':
 					count += _putchar('%');
