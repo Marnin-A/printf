@@ -1,4 +1,5 @@
 #include "main.h"
+#include <string.h>
 #include <stdlib.h>
 #include <stdarg.h>
 
@@ -18,11 +19,6 @@ int _printf(const char *format, ...)
 	int count = 0;
 
 	va_start(args, format);
-<<<<<<< HEAD
-	while (*format != '\0')
-	{
-		if (*format == '%')
-=======
 
 	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
 				return (-1);
@@ -30,37 +26,7 @@ int _printf(const char *format, ...)
 	for (ptr = format; *ptr != '\0'; ptr++)
 	{
 		if (*ptr == '%')
->>>>>>> 8ced175d84bbb880845b9c6681fecb768609f3e1
 		{
-			char *numStr;
-
-<<<<<<< HEAD
-			format++;
-			if (val == 'c')
-			{
-				_putchar(val);
-				n++;
-			}
-			else if (val == 's')
-			{
-				const char *str = va_arg(args, const char *);
-
-				while (*str != '\0')
-				{
-					_putchar(*str);
-					n++;
-					str++;
-				}
-			}
-			else if (val == '%')
-			{
-				_putchar('%');
-				n++;
-			}
-			else
-			{
-				return (-1);
-=======
 			ptr++;
 			switch (*ptr)
 			{
@@ -72,44 +38,50 @@ int _printf(const char *format, ...)
 				case 's':
 					{
 						const char *str = va_arg(args, const char *);
-						while (*str != '\0')
+						int i, len = 0;
+
+						if (str == NULL)
 						{
-							count += _putchar(*str);
-							str++;
+							return (len);
+						}
+						else
+						{
+							len = strlen(str);
+
+							for (i = 0; i < len; i++)
+							{
+							       	_putchar(str[i]);
+								count++;
+							}
 						}
 						break;
 					}
 				case 'd':
+					{
+						count += printf_dec(va_arg(args, int));
+						break;
+					}
             			case 'i':
-            				{
-                				int num = va_arg(args, int);
-						int digits = num_digits(num);
-                				char *buffer = (char *)malloc((digits + 1) * sizeof(char));
-
-                                                if (buffer == NULL)
-                                                {
-                                                    va_end(args);
-                                                    return (-1);
-						}
-						int_to_str(num, buffer, digits + 1);
-
-                				numStr = buffer;
-                				
-						while (*numStr != '\0')
-                				{
-                    					count += _putchar(*numStr);
-                    					numStr++;
-                				}
-                                                free(buffer);
-                				break;
+            				{	
+						count += printf_int(va_arg(args, int));
+						break;
             				}
+				case 'R':
+                                        {
+                                                count += printf_rot13(va_arg(args, char *));
+                                                break;
+                                        }
+				case 'r':
+                                        {
+                                                count += printf_r(va_arg(args, char *));
+                                                break;
+                                        }
 				case '%':
 					count += _putchar('%');
 					break;
 				default:
 					count += _putchar('%');
 					break;
->>>>>>> 8ced175d84bbb880845b9c6681fecb768609f3e1
 			}
 		}
 		else
@@ -118,9 +90,5 @@ int _printf(const char *format, ...)
 		}
 	}
 	va_end(args);
-<<<<<<< HEAD
-	return (n);
-=======
 	return count;
->>>>>>> 8ced175d84bbb880845b9c6681fecb768609f3e1
 }
